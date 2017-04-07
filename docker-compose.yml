@@ -1,0 +1,24 @@
+version: "2"
+
+services:
+    postgres:   
+        image: idiarules/postgres-9.3:latest
+        container_name: "postgres"
+        networks:
+            - idiarules-net
+    
+    idia-rules:
+        depends_on: 
+            - "postgres"
+        image: idiarules/idia-rules:latest
+        environment:
+            - PGHOST=postgres
+            - PGDATABASE=idiarules
+            - PGUSER=idiarules
+        container_name: "idia-rules"
+        networks:
+            - idiarules-net
+
+networks:
+    idiarules-net:
+        driver: bridge
