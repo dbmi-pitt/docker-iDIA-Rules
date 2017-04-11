@@ -1,15 +1,16 @@
+
 version: "2"
 
 services:
-    postgres:   
+    idiarules-postgres:   
         image: idiarules/postgres-9.3:latest
-        container_name: "postgres"
+        container_name: "idiarules-postgres"
         networks:
             - idiarules-net
     
     idia-rules:
         depends_on: 
-            - "postgres"
+            - "idiarules-postgres"
         image: idiarules/idia-rules:latest
         environment:
             - PGHOST=postgres
